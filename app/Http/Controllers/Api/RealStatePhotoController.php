@@ -16,14 +16,15 @@ class RealStatePhotoController extends Controller
         $this->realStatePhoto = $realStatePhoto;
     }
 
-    public function setThumb($photoId, $realStateId){
+    public function setThumb($photoId, $realStateId): \Illuminate\Http\JsonResponse
+    {
         try{
 
             $photo = $this->realStatePhoto
-                ->where('real_state_photo', $realStateId)
-                ->where('is_thumb', true)->first();
+                ->where('real_state_id', $realStateId)
+                ->where('is_thumb', true);
 
-            if($photo->count()) $photo->update(['is_thumb' => false]);
+            if($photo->count()) $photo->first()->update(['is_thumb' => false]);
 
             $photo = $this->realStatePhoto->find($photoId);
             $photo->update(['is_thumb' => true]);
@@ -44,6 +45,11 @@ class RealStatePhotoController extends Controller
         try{
 
             $photo = $this->realStatePhoto->find($photoId);
+
+            if($photo->is_thumb){
+                $message = new ApiMessages('Não é possivel remover foto de Thumb, selecione outra thumb e remova a imagem desejada!');
+                return response()->json($message->getMessage(), 401);
+            }
 
             if($photo) {
                 Storage::disk('public')->delete($photo->photo);
