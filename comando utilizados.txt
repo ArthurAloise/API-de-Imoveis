@@ -31,3 +31,11 @@ php artisan make:model UserProfile
 php artisan make:model RealStatePhoto
 
 php artisan make:controller Api/RealStatePhotoController
+
+composer require tymon/jwt-auth
+
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+
+php artisan jwt:secret
+
+php artisan make:controller Api/Auth/LoginJwtController
