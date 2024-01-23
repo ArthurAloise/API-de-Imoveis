@@ -39,3 +39,15 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 php artisan jwt:secret
 
 php artisan make:controller Api/Auth/LoginJwtController
+
+ php artisan make:migration create_tables_countries_states_cities
+
+php artisan make:migration create_table_adresses --create=adresses
+
+php artisan make:model Country
+
+php artisan make:model State
+
+php artisan make:model City
+
+php artisan make:model Address
