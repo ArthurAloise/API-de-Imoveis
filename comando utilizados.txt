@@ -51,3 +51,7 @@ php artisan make:model State
 php artisan make:model City
 
 php artisan make:model Address
+
+php artisan make:controller Api/RealStateSearchController --resource --api
+
+php artisan make:migration alter_table_real_state_add_collumn_address_id --table=real_state
