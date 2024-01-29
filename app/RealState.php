@@ -35,7 +35,8 @@ class RealState extends Model
         return $this->hasMany(RealStatePhoto::class);
     }
 
-    public function adresses(){
+    public function address(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(Address::class);
     }
 }
